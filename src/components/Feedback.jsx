@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 //import { Paragraf, Span } from './User.styled';
 
 export const Feedback = ({ options: { good, neutral, bad } }) => {

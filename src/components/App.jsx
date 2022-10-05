@@ -12,7 +12,6 @@ export class App extends Component {
     bad: 0,
   };
 
-
   // clickHandler = () => {
   //   this.setState({ isListShown: true });
   // };
