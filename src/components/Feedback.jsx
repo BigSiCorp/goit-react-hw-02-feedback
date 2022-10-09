@@ -1,32 +1,38 @@
-//import PropTypes from 'prop-types';
-//import { Paragraf, Span } from './User.styled';
-//import { countGoodFeedback } from './App'
+import PropTypes from 'prop-types';
+import { Statistics } from './Statistics/Statistics';
+import { FeedbackOption } from './FeedbackOptions/FeedbackOptions';
+import { Section } from './Section/SectionTitle';
+import { Notification } from './Notification/Notification';
 
-export const Feedback = ({ options: { good, neutral, bad }, countGoodFeedback}) => {
-   
-    
-    return (
-        <>
-            <h2>Please leave feedback</h2>
-            <button name="good" type="button" onClick={countGoodFeedback}>Good</button>
-            <button name="neutral" type="button" onClick={countGoodFeedback}>Neutral</button>
-            <button name="bad" type="button" onClick={countGoodFeedback}>Bad</button>
-            <h2>Statistics</h2>
-            <ul>
-                <li>Good: {good}</li>
-                <li>Neutral: {neutral}</li>
-                <li>Bad: {bad}</li>
-                <li>Total: {bad}</li>
-                <li>Positive feedback: {bad}%</li>
-            </ul>
+export const Feedback = ({
+  options,
+  countFeedback,
+  total,
+  countPositiveFeedbackPercentage,
+}) => {
+  return (
+    <>
+      <Section title="Please leave feedback">
+        <FeedbackOption onLeaveFeedback={countFeedback} options={options} />
+      </Section>
+      <Section title="Statistics">
+        {total ? (
+          <Statistics
+            total={total}
+            options={options}
+            positivePercentage={countPositiveFeedbackPercentage}
+          />
+        ) : (
+          <Notification warning="There is no feedback" />
+        )}
+      </Section>
+    </>
+  );
+};
 
-        </>
-    );
-}
-
-// User.propTypes = {
-//     user: PropTypes.shape({
-//         name: PropTypes.string.isRequired,
-//         email: PropTypes.string.isRequired,
-//     }).isRequired
-// }
+Feedback.propTypes = {
+  options: PropTypes.object,
+  countFeedback: PropTypes.func,
+  total: PropTypes.number,
+  countPositiveFeedbackPercentage: PropTypes.func,
+};
